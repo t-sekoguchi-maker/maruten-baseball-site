@@ -1,0 +1,300 @@
+<title>3列固定グリッド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --surface: #ffffff;
+    --ink: #232320;
+    --ink-soft: #55534c;
+    --banner: #26262a;
+    --banner-2: #323234;
+    --accent: #e4b73a;
+    --accent-ink: #4a3a08;
+    --muted: #b7b3a8;
+    --avatar: #c7c3ba;
+    --avatar-2: #a9a59a;
+    --line: #e4dfd2;
+    --radius: 10px;
+    --font-display: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    --font-body: "Noto Sans JP", "Zen Kaku Gothic New", sans-serif;
+    --font-mono: "Roboto Mono", ui-monospace, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1c1b18;
+      --surface: #26251f;
+      --ink: #f2efe6;
+      --ink-soft: #c7c2b4;
+      --banner: #141413;
+      --banner-2: #1e1d1a;
+      --accent: #f0c452;
+      --accent-ink: #2a2004;
+      --muted: #5c584c;
+      --avatar: #4a473d;
+      --avatar-2: #3a3831;
+      --line: #38362e;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #1c1b18;
+    --surface: #26251f;
+    --ink: #f2efe6;
+    --ink-soft: #c7c2b4;
+    --banner: #141413;
+    --banner-2: #1e1d1a;
+    --accent: #f0c452;
+    --accent-ink: #2a2004;
+    --muted: #5c584c;
+    --avatar: #4a473d;
+    --avatar-2: #3a3831;
+    --line: #38362e;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: clamp(20px, 5vw, 48px) clamp(16px, 4vw, 32px) 64px;
+  }
+
+  .intro {
+    margin-bottom: clamp(24px, 5vw, 40px);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--accent-ink);
+    background: var(--accent);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  :root[data-theme="dark"] .eyebrow,
+  :root:not([data-theme="light"]) .eyebrow {
+    color: var(--banner);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .eyebrow { color: var(--accent-ink); }
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(26px, 5vw, 38px);
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .intro p {
+    max-width: 62ch;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+
+  .intro code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 0.1em 0.4em;
+    border-radius: 5px;
+  }
+
+  .frame {
+    background: var(--banner);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 1px 0 var(--line);
+  }
+
+  .frame-head {
+    background: linear-gradient(135deg, var(--banner) 55%, var(--banner-2));
+    padding: clamp(22px, 6vw, 40px) clamp(18px, 5vw, 32px) clamp(28px, 6vw, 36px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .frame-head::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto auto;
+    width: 55%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 30% 30%, rgba(228,183,58,0.16), transparent 65%);
+  }
+
+  .frame-head h2 {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #f4f0e8;
+    font-size: clamp(20px, 4.5vw, 26px);
+    letter-spacing: 0.06em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .frame-head .bar {
+    position: relative;
+    width: 46px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(6px, 2vw, 16px);
+    padding: clamp(12px, 3vw, 20px);
+    background: var(--bg);
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    transition: transform 0.15s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+  }
+  .card:hover { transform: translateY(-2px); }
+
+  .card .photo {
+    aspect-ratio: 1;
+    background: var(--avatar);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .card .photo svg {
+    width: 78%;
+    height: 78%;
+    color: var(--avatar-2);
+  }
+
+  .card .name {
+    padding: clamp(6px, 2vw, 12px) clamp(6px, 2vw, 10px);
+    text-align: center;
+  }
+
+  .card .num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(9px, 2.2vw, 11px);
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+
+  .card .full {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: clamp(11px, 2.6vw, 14px);
+    line-height: 1.3;
+    color: var(--ink);
+    overflow-wrap: anywhere;
+  }
+
+  .foot-note {
+    margin-top: clamp(20px, 5vw, 32px);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .foot-note .mark {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  :root[data-theme="dark"] .foot-note .mark,
+  :root:not([data-theme="light"]) .foot-note .mark {
+    color: var(--banner);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) .foot-note .mark { color: var(--accent-ink); }
+  }
+
+  .foot-note strong { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 420px) {
+    .card .num { display: none; }
+  }
+</style>
+
+<div class="page">
+  <div class="intro">
+    <span class="eyebrow">TRIAL &mdash; 埋め込みグリッド試作</span>
+    <h1>スマホでも3列を維持する<br>メンバーグリッド</h1>
+    <p>Google Sitesの標準ブロックは幅が狭くなると自動で1列に積み上がりますが、これは<code>grid-template-columns: repeat(3, 1fr)</code>を固定したカスタムHTMLです。ウィンドウ幅を狭めても、この枠内は常に3列のまま縮小します。</p>
+  </div>
+
+  <div class="frame">
+    <div class="frame-head">
+      <h2>Members</h2>
+      <div class="bar"></div>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">00</span><span class="full">溝口 康人</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">1</span><span class="full">田岡 峻</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">3</span><span class="full">井田 理貴</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">9</span><span class="full">野口 就平</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">10</span><span class="full">立石 優剛</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">11</span><span class="full">奥山 和哉</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">19</span><span class="full">米山 響</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">23</span><span class="full">杉本 亨介</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">24</span><span class="full">世古口 卓也</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">33</span><span class="full">井阪 豊</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">40</span><span class="full">中井 誉</span></div></div>
+      <div class="card"><div class="photo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div><div class="name"><span class="num">53</span><span class="full">徳谷 忠宏</span></div></div>
+    </div>
+  </div>
+
+  <div class="foot-note">
+    <span class="mark">i</span>
+    <span><strong>実際に埋め込む場合の注意:</strong> Google Sitesの「埋め込む」機能はURL(iframe)経由が基本のため、このデモをそのまま貼り付けることはできません。実サイトに反映するには、このHTMLをどこかにホスティングしてURLを発行する必要があります。気に入ったら、その方法を一緒に検討しましょう。</span>
+  </div>
+</div>
