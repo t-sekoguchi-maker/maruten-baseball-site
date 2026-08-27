@@ -52,11 +52,11 @@
   var labels = ["投手", "捕手", "内野手", "外野手"];
   var codes = ["p", "c", "i", "o"];
   var params = new URLSearchParams(location.search);
-  var pos = params.get("pos") || "";
+  var pos = (params.get("pos") || "").split(",").map(function(s){ return s.trim(); });
   var row = document.getElementById("row");
   labels.forEach(function(label, idx) {
     var div = document.createElement("div");
-    div.className = "chip" + (codes[idx] === pos ? " active" : "");
+    div.className = "chip" + (pos.indexOf(codes[idx]) !== -1 ? " active" : "");
     div.textContent = label;
     row.appendChild(div);
   });
