@@ -1,0 +1,63 @@
+<title>ポジション</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f0e8;
+    --ink: #232320;
+    --ink-soft: #736f64;
+    --accent: #e4b73a;
+    --accent-ink: #2c2205;
+    --line: #e4dfd2;
+    --chip-bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: transparent;
+    font-family: "Noto Sans JP", "Zen Kaku Gothic New", sans-serif;
+  }
+  .row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(6px, 2vw, 12px);
+    padding: 6px 4px;
+  }
+  .chip {
+    flex: 1 1 0;
+    max-width: 140px;
+    text-align: center;
+    padding: 10px 6px;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: clamp(12px, 3vw, 15px);
+    letter-spacing: 0.02em;
+    transition: none;
+  }
+  .chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    box-shadow: 0 2px 8px rgba(228,183,58,0.35);
+  }
+</style>
+<div class="row" id="row"></div>
+<script>
+  var labels = ["投手", "捕手", "内野手", "外野手"];
+  var codes = ["p", "c", "i", "o"];
+  var params = new URLSearchParams(location.search);
+  var pos = params.get("pos") || "";
+  var row = document.getElementById("row");
+  labels.forEach(function(label, idx) {
+    var div = document.createElement("div");
+    div.className = "chip" + (codes[idx] === pos ? " active" : "");
+    div.textContent = label;
+    row.appendChild(div);
+  });
+</script>
